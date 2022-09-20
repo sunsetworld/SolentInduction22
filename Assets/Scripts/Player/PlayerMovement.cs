@@ -8,10 +8,13 @@ public class PlayerMovement : MonoBehaviour
 
     public float baseMoveSpeed;
     public float baseJumpHeight;
-    public float healthEffectStrength;  // How much the ammount of health the player has will change the stats
+    public int baseAttackDamage;
+
+    public int healthEffectStrength;  // How much the ammount of health the player has will change the stats
 
     public float currentMoveSpeed;
     private float currentJumpHeight;
+    public int currentAttackDamage;
     
     void Start()
     {
@@ -21,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
-        currentMoveSpeed = baseMoveSpeed * ((playerHealth.health) / healthEffectStrength);
+        currentMoveSpeed = baseMoveSpeed * (healthEffectStrength / 10);
+        currentAttackDamage = baseAttackDamage + healthEffectStrength;
     }
 }
