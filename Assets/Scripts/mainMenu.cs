@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class mainMenu : MonoBehaviour
 {
+    [SerializeField] GameObject mainMenuCanvas;
+    [SerializeField] GameObject settingsCanvas;
     // Start is called before the first frame update
     void Start()
     {
-        
+        CloseSettings();
     }
 
     // Update is called once per frame
@@ -25,7 +27,14 @@ public class mainMenu : MonoBehaviour
 
     public void OpenSettings()
     {
+        mainMenuCanvas.SetActive(false);
+        settingsCanvas.SetActive(true);
+    }
 
+    public void CloseSettings()
+    {
+        mainMenuCanvas.SetActive(true);
+        settingsCanvas.SetActive(false);
     }
 
     public void QuitGame()
