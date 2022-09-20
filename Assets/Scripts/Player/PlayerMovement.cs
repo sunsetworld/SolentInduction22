@@ -9,24 +9,23 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
 
     [Header("Movement")]
-    [Range(0, 100)] public float baseMoveSpeed;
-    [Range(0, 100)] public float baseAcceleration;
-    [Range(0, 100)] public float baseAirAcceleration;
+    [Range(0, 10)] public float baseMoveSpeed;
+    [Range(0, 50)] public float baseAcceleration;
+    [Range(0, 50)] public float baseAirAcceleration;
     [Range(0, 100)] public float baseJumpHeight;
     //[Range(0, 100)] public int baseAttackDamage;
 
-    public int healthEffectStrength;  // How much the ammount of health the player has will change the stats
+    public float healthEffectStrength;  // How much the ammount of health the player has will change the stats
+    [Range(0, 150)] public float healthToSpeedIncrease;
 
     [SerializeField] private float currentMoveSpeed;
-    [SerializeField] private float currentAcceleration;
-    [SerializeField] private float currentAirAcceleration;
     [SerializeField] private float currentJumpHeight;
     //[SerializeField] private int currentAttackDamage;
 
 
     private Vector2 direction, desiredVelocity, velocity;
     private float maxSpeedChange, acceleration;
-    //private GroundCheck groundCheck;
+    private GroundCheck groundCheck;
     public bool isGrounded;
     
 
@@ -35,28 +34,28 @@ public class PlayerMovement : MonoBehaviour
     {
         playerHealth = GetComponent<PlayerHealth>();
         rb = GetComponent<Rigidbody>();
-        //groundCheck = GetComponent<GroundCheck>();
+        groundCheck = GetComponent<GroundCheck>();
     }
 
 
     
     void Update()
     {
-        currentMoveSpeed = baseMoveSpeed * (healthEffectStrength / 10);
+        currentMoveSpeed = (baseMoveSpeed * (healthEffectStrength / healthToSpeedIncrease)) + baseMoveSpeed;
         //currentAttackDamage = baseAttackDamage + healthEffectStrength;
 
         direction.x = Input.GetAxisRaw("Horizontal");
-        desiredVelocity = new Vector2(direction.x, 0f) * Mathf.Max(currentMoveSpeed - groundCheck.friction, 0f);
+        desiredVelocity = new Vector2(direction.x, 0f) * Mathf.Max(currentMoveSpeed, 0f);
     }
 
 
 
     private void FixedUpdate()
     {
-        isGrounded = groundCheck.onGround;
+        isGrounded = groundCheck.grounded;
         velocity = rb.velocity;
 
-        acceleration = isGrounded ? currentAcceleration : currentAirAcceleration;
+        acceleration = isGrounded ? baseAcceleration : baseAirAcceleration;
         maxSpeedChange = acceleration * Time.deltaTime;
         velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
 

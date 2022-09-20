@@ -7,7 +7,7 @@ public class PlayerHealth : MonoBehaviour
 {
     private PlayerMovement playerMovement;
 
-    public int health;
+    [Range(0, 100)] public int health;
     private int maxHealth = 100;
 
     public int starvationAmmount;
@@ -27,7 +27,7 @@ public class PlayerHealth : MonoBehaviour
     
     void Update()
     {
-        //OnHealthChange();
+        OnHealthChange();
     }
 
 
