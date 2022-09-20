@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 direction, desiredVelocity, velocity;
     private float maxSpeedChange, acceleration;
     private GroundCheck groundCheck;
-    public bool isGrounded;
+    public bool isGrounded, isMoving;
     
 
 
@@ -46,6 +46,10 @@ public class PlayerMovement : MonoBehaviour
 
         direction.x = Input.GetAxisRaw("Horizontal");
         desiredVelocity = new Vector2(direction.x, 0f) * Mathf.Max(currentMoveSpeed, 0f);
+        if (rb.velocity.x != 0)
+            isMoving = true;
+        else
+            isMoving = false;
     }
 
 

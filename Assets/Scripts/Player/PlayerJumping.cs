@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class PlayerJumping : MonoBehaviour
 {
-    [Range(0f, 10f)] public float jumpHeight = 3f;
-    [Range(0, 3)] public int maxAirJumps = 0;
-    [Range(0, -20)] public float defaultGravity;
-    [Range(0f, 5f)] public float downwardMovementMultiplier = 3f;
+    [Range(0f, 15f)] public float jumpHeight;
+    [Range(0, 3)] public int maxAirJumps;
+    [Range(0, -30)] public float defaultGravity;
+    [Range(0f, 5f)] public float downwardMovementMultiplier = 2.5f;
     [Range(0f, 5f)] public float upwardMovementMultiplier = 1.7f;
 
     private Rigidbody rb;
     private GroundCheck groundCheck;
     private Vector2 velocity;
     public ConstantForce gravity;
+
+    public bool variableJump;
+
+    public float coyoteTime;
+    private float coyoteCounter;
 
     private int jumpPhase;
     private float jumpSpeed;
@@ -32,6 +37,14 @@ public class PlayerJumping : MonoBehaviour
     void Update()
     {
         desiredJump |= Input.GetButtonDown("Jump");
+
+        if (Input.GetButtonUp("Jump") && variableJump && rb.velocity.y > 0)  // Variable jump
+            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y * 0.5f, 0);
+
+        if (isGrounded)  // Coyote time manager
+            coyoteCounter = coyoteTime;
+        else
+            coyoteCounter -= Time.deltaTime;
     }
 
 
@@ -40,9 +53,9 @@ public class PlayerJumping : MonoBehaviour
         isGrounded = groundCheck.grounded;
         velocity = rb.velocity;
 
-        if (isGrounded)
+        if (coyoteCounter > 0)  // Is grounded
         {
-            jumpPhase = 0;
+            jumpPhase = 0;  // Reset air jumps
         }
 
         if (desiredJump)
@@ -51,15 +64,15 @@ public class PlayerJumping : MonoBehaviour
             JumpAction();
         }
 
-        if (rb.velocity.y > 0)
+        if (rb.velocity.y > 0)  // Jumping up
         {
             gravity.force = new Vector3(0.0f, defaultGravity * upwardMovementMultiplier, 0.0f);
         }
-        else if (rb.velocity.y < 0)
+        else if (rb.velocity.y < 0)  // Falling down
         {
             gravity.force = new Vector3(0.0f, defaultGravity * downwardMovementMultiplier, 0.0f);
         }
-        else if (rb.velocity.y == 0)
+        else if (rb.velocity.y == 0)  // Grounded
         {
             gravity.force = new Vector3(0.0f, defaultGravity, 0.0f);
         }
@@ -70,7 +83,7 @@ public class PlayerJumping : MonoBehaviour
 
     private void JumpAction()
     {
-        if (isGrounded || jumpPhase < maxAirJumps)
+        if (coyoteCounter > 0 || jumpPhase < maxAirJumps)
         {
             jumpPhase += 1;
 
