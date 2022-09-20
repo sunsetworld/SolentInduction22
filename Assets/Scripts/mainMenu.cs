@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class mainMenu : MonoBehaviour
 {
@@ -14,5 +15,22 @@ public class mainMenu : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void OpenGame()
+    {
+        int currentLevel = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentLevel + 1);
+    }
+
+    public void OpenSettings()
+    {
+
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+        Debug.Log("This should quit the game.");
     }
 }
