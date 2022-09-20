@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class cameraFollow : MonoBehaviour
 {
+
+    [SerializeField] Camera cam;
+    [SerializeField] Transform transform;
+    [SerializeField] Vector3 gap;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +18,10 @@ public class cameraFollow : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void followPlayer()
+    {
+        cam.transform.position = transform.position;
     }
 }
