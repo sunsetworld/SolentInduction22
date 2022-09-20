@@ -5,23 +5,23 @@ using UnityEngine;
 public class cameraFollow : MonoBehaviour
 {
 
-    [SerializeField] Camera cam;
-    [SerializeField] Transform transform;
-    [SerializeField] Vector3 gap;
+    [SerializeField] Transform player;
+    [SerializeField] Vector3 offset;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        followPlayer();     
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        followPlayer();
     }
 
     void followPlayer()
     {
-        cam.transform.position = transform.position;
+        transform.position = player.position + offset;
     }
 }
