@@ -15,11 +15,16 @@ public class PlayerMovement : MonoBehaviour
     public float currentMoveSpeed;
     private float currentJumpHeight;
     public int currentAttackDamage;
+
+    public bool isGrounded;
     
+
+
     void Start()
     {
         playerHealth = GetComponent<PlayerHealth>();
     }
+
 
     
     void Update()
@@ -27,4 +32,9 @@ public class PlayerMovement : MonoBehaviour
         currentMoveSpeed = baseMoveSpeed * (healthEffectStrength / 10);
         currentAttackDamage = baseAttackDamage + healthEffectStrength;
     }
+
+    //Variable Jump Height - https://www.youtube.com/watch?v=Mo1-sKYbks0
+    //Coyote Time - https://www.youtube.com/watch?v=RFix_Kg2Di0
+    //Movement - 
+    // https://www.youtube.com/watch?v=8QPmhDYn6rk
 }
