@@ -21,7 +21,6 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
-        // If left key pressed
         currentMoveSpeed = baseMoveSpeed * ((playerHealth.health) / healthEffectStrength);
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -21,6 +22,12 @@ public class PlayerHealth : MonoBehaviour
 
     void OnHealthChange()
     {
-        //if (health)
+
     }
 }
+
+/* Max health - 25 Damage
+ * No Health - 120 Damage
+ * 
+ * Loose 1 health per second (Stops at 10 health)
+ * 
