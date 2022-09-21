@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     //[Range(0, 100)] public int baseAttackDamage;
 
     public float healthEffectStrength;  // How much the ammount of health the player has will change the stats
-    [Range(0, 150)] public float healthToSpeedIncrease;
+    [Range(0, 300)] public float healthToSpeedIncrease;
 
     public float currentMoveSpeed;
     [SerializeField] private float currentJumpHeight;
@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public Vector2 direction, desiredVelocity, velocity;
     private float maxSpeedChange, acceleration;
     private GroundCheck groundCheck;
-    public bool isGrounded, isMoving;
+    public bool isGrounded, isMoving, controlsEnabled, facingRight;
     
 
 
@@ -44,7 +44,10 @@ public class PlayerMovement : MonoBehaviour
         currentMoveSpeed = (baseMoveSpeed * (healthEffectStrength / healthToSpeedIncrease)) + baseMoveSpeed;
         //currentAttackDamage = baseAttackDamage + healthEffectStrength;
 
-        direction.x = Input.GetAxisRaw("Horizontal");
+        direction.x = 0;
+        if (controlsEnabled)
+            direction.x = Input.GetAxisRaw("Horizontal");
+
         desiredVelocity = new Vector2(direction.x, 0f) * Mathf.Max(currentMoveSpeed, 0f);
         if (rb.velocity.x != 0)
             isMoving = true;
@@ -64,6 +67,16 @@ public class PlayerMovement : MonoBehaviour
         velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
 
         rb.velocity = velocity;
+
+        if (velocity.x < 0)
+        {
+            facingRight = false;
+            
+        }
+        else if (velocity.x > 0)
+        {
+            facingRight = true;
+        }
     }
 
 

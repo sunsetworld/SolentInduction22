@@ -39,7 +39,8 @@ public class PlayerJumping : MonoBehaviour
 
     void Update()
     {
-        desiredJump |= Input.GetButtonDown("Jump");
+        if (playerMovement.controlsEnabled)
+            desiredJump |= Input.GetButtonDown("Jump");
 
         if (Input.GetButtonUp("Jump") && variableJump && rb.velocity.y > 0)  // Variable jump
             rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y * 0.5f, 0);
@@ -84,6 +85,7 @@ public class PlayerJumping : MonoBehaviour
         {
             // <-- Particles
             // <-- Sound
+            Debug.Log(oldVelocity / 3);
             if (oldVelocity < 30)
             {
                 Vector2 desiredVelocity = new Vector2(playerMovement.direction.x, 0f) * Mathf.Max(playerMovement.currentMoveSpeed * 10, 0f);
