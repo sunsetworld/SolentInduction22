@@ -18,12 +18,12 @@ public class PlayerMovement : MonoBehaviour
     public float healthEffectStrength;  // How much the ammount of health the player has will change the stats
     [Range(0, 150)] public float healthToSpeedIncrease;
 
-    [SerializeField] private float currentMoveSpeed;
+    public float currentMoveSpeed;
     [SerializeField] private float currentJumpHeight;
     //[SerializeField] private int currentAttackDamage;
 
 
-    private Vector2 direction, desiredVelocity, velocity;
+    [HideInInspector] public Vector2 direction, desiredVelocity, velocity;
     private float maxSpeedChange, acceleration;
     private GroundCheck groundCheck;
     public bool isGrounded, isMoving;

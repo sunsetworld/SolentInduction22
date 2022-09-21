@@ -12,6 +12,7 @@ public class PlayerJumping : MonoBehaviour
 
     private Rigidbody rb;
     private GroundCheck groundCheck;
+    private PlayerMovement playerMovement;
     private Vector2 velocity;
     public ConstantForce gravity;
 
@@ -22,8 +23,9 @@ public class PlayerJumping : MonoBehaviour
 
     private int jumpPhase;
     private float jumpSpeed;
+    private float oldVelocity;
 
-    private bool desiredJump, isGrounded;
+    private bool desiredJump, isGrounded, wasGrounded;
 
 
     void Awake()
@@ -31,6 +33,7 @@ public class PlayerJumping : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         groundCheck = GetComponent<GroundCheck>();
         gravity = gameObject.AddComponent<ConstantForce>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
 
@@ -77,6 +80,24 @@ public class PlayerJumping : MonoBehaviour
             gravity.force = new Vector3(0.0f, defaultGravity, 0.0f);
         }
 
+        if (!wasGrounded && isGrounded)  // Landing
+        {
+            // <-- Particles
+            // <-- Sound
+            if (oldVelocity < 30)
+            {
+                Vector2 desiredVelocity = new Vector2(playerMovement.direction.x, 0f) * Mathf.Max(playerMovement.currentMoveSpeed * 10, 0f);
+                velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, oldVelocity / 3);
+            }
+            else
+            {
+                // <-- Fall Damage
+            }
+        }
+
+        wasGrounded = isGrounded;
+        oldVelocity = -velocity.y + 2;
+
         rb.velocity = velocity;
     }
 
@@ -98,6 +119,9 @@ public class PlayerJumping : MonoBehaviour
                 jumpSpeed += Mathf.Abs(rb.velocity.y);
             }
             velocity.y += jumpSpeed;
+
+            // <-- Particles
+            // <-- Sound
         }
     }
 }
