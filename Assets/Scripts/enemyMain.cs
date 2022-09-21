@@ -5,17 +5,17 @@ using UnityEngine.AI;
 public class enemyMain : MonoBehaviour
 {
     public Transform player;
-    protected NavMeshAgent enemyMesh;
+    protected NavMeshAgent EnemyNavMeshAgent;
 
     // Start is called before the first frame update
     void Start()
     {
-        enemyMesh = GetComponent<NavMeshAgent>();
+        EnemyNavMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        enemyMesh.SetDestination(player.position);
+        EnemyNavMeshAgent.SetDestination(player.position);
     }
 }
