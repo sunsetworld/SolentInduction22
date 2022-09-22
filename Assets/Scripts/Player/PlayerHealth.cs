@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class PlayerHealth : MonoBehaviour
     public int starvationAmmount;
     public int starvationSpeed;
     public int starvationStop;
+
+    public float invincibilityTime;
+    private float iFramesRemaining;
 
 
 
@@ -28,6 +32,11 @@ public class PlayerHealth : MonoBehaviour
     void Update()
     {
         OnHealthChange();
+
+        if (iFramesRemaining > 0)
+        {
+            iFramesRemaining -= Time.deltaTime;
+        }
     }
 
 
@@ -35,6 +44,10 @@ public class PlayerHealth : MonoBehaviour
     void OnHealthChange()
     {
         playerMovement.healthEffectStrength = Mathf.RoundToInt((-health + 100) / 1.25f);
+        if (health <= 0)
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
 
@@ -46,9 +59,19 @@ public class PlayerHealth : MonoBehaviour
         if (health > starvationStop)  // If health is above 10
         {
             health -= starvationAmmount;  // Loose 1 health per second
-            OnHealthChange();
         }
 
         StartCoroutine(StarvationDamage());  // Repeat
+    }
+
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (iFramesRemaining <= 0 && col.gameObject.CompareTag("Enemy Attack"))
+        {
+            iFramesRemaining = invincibilityTime;
+            health -= 15;
+            //anim.SetTrigger("Hurt");
+        }
     }
 }
