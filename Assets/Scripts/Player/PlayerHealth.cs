@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
 {
     private PlayerMovement playerMovement;
+    private Animator anim;
 
     [Range(0, 100)] public int health;
     private int maxHealth = 100;
@@ -23,6 +24,7 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
+        anim = GetComponent<Animator>();
         health = maxHealth;
         StartCoroutine(StarvationDamage());
     }
@@ -71,7 +73,7 @@ public class PlayerHealth : MonoBehaviour
         {
             iFramesRemaining = invincibilityTime;
             health -= 15;
-            //anim.SetTrigger("Hurt");
+            anim.SetTrigger("Hurt");
         }
     }
 }
