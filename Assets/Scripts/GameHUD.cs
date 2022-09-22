@@ -7,12 +7,12 @@ using UnityEngine.UI;
 public class GameHUD : MonoBehaviour
 {
     [SerializeField] Slider sliderValue;
-    PlayerHealth player; 
+    [SerializeField] PlayerHealth player;
+    int health;
 
     // Start is called before the first frame update
     void Start()
     {
-        player.GetComponent<PlayerHealth>();
     }
 
     // Update is called once per frame
@@ -23,6 +23,6 @@ public class GameHUD : MonoBehaviour
 
     void UpdateHealth()
     {
-        sliderValue.value = player.GetHealth() / 1;
+        sliderValue.value = player.GetHealth();
     }
 }
