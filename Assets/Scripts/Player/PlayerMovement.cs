@@ -68,14 +68,15 @@ public class PlayerMovement : MonoBehaviour
 
         rb.velocity = velocity;
 
-        if (velocity.x < 0)
+        if (velocity.x < 0 && facingRight == true)
         {
             facingRight = false;
-            
+            transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
         }
-        else if (velocity.x > 0)
+        else if (velocity.x > 0 && facingRight == false)
         {
             facingRight = true;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         }
     }
 
