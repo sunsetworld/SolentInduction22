@@ -56,4 +56,9 @@ public class PlayerHealth : MonoBehaviour
     {
         return health;
     }
+
+    public void AddHealth(int healthToAdd)
+    {
+        health += healthToAdd;
+    }
 }

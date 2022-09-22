@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class kill : MonoBehaviour
 {
+    [SerializeField] private PlayerHealth pH;
     // Start is called before the first frame update
     void Start()
     {
