@@ -2818,10 +2818,30 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 338665786991234221, guid: 3e65904e03e5f1e4da053ddbd8ec4623, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.000061035156
+      objectReference: {fileID: 0}
+    - target: {fileID: 338665786991234221, guid: 3e65904e03e5f1e4da053ddbd8ec4623, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000045776367
+      objectReference: {fileID: 0}
+    - target: {fileID: 859101323179736742, guid: 3e65904e03e5f1e4da053ddbd8ec4623, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8384a8f2d72cb904e9e0e280a0f22a8a, type: 3}
     - target: {fileID: 3296428023239479585, guid: 3e65904e03e5f1e4da053ddbd8ec4623, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 955
       objectReference: {fileID: 0}
+    - target: {fileID: 3823465430387015508, guid: 3e65904e03e5f1e4da053ddbd8ec4623, type: 3}
+      propertyPath: m_Value
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4889012558941502070, guid: 3e65904e03e5f1e4da053ddbd8ec4623, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e2fb5f4024930e544aeebb8bea8eb09f, type: 3}
     - target: {fileID: 7869816562275644996, guid: 3e65904e03e5f1e4da053ddbd8ec4623, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2909,6 +2929,14 @@ PrefabInstance:
     - target: {fileID: 8617492948025430889, guid: 3e65904e03e5f1e4da053ddbd8ec4623, type: 3}
       propertyPath: m_Name
       value: GameHUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 8860184177740344325, guid: 3e65904e03e5f1e4da053ddbd8ec4623, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8860184177740344325, guid: 3e65904e03e5f1e4da053ddbd8ec4623, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.8029785
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e65904e03e5f1e4da053ddbd8ec4623, type: 3}
