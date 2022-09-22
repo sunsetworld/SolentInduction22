@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerJumping : MonoBehaviour
 {
-    [Range(0f, 15f)] public float jumpHeight;
+    [Range(0f, 25f)] public float jumpHeight;
     [Range(0, 3)] public int maxAirJumps;
     [Range(0, -30)] public float defaultGravity;
     [Range(0f, 5f)] public float downwardMovementMultiplier = 2.5f;
@@ -85,11 +85,11 @@ public class PlayerJumping : MonoBehaviour
         {
             // <-- Particles
             // <-- Sound
-            Debug.Log(oldVelocity / 3);
+            Debug.Log(oldVelocity / 5);
             if (oldVelocity < 30)
             {
                 Vector2 desiredVelocity = new Vector2(playerMovement.direction.x, 0f) * Mathf.Max(playerMovement.currentMoveSpeed * 10, 0f);
-                velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, oldVelocity / 3);
+                velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, oldVelocity / 5);
             }
             else
             {

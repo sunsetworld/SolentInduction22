@@ -13,14 +13,14 @@ public class PlayerMovement : MonoBehaviour
     [Range(0, 50)] public float baseAcceleration;
     [Range(0, 50)] public float baseAirAcceleration;
     [Range(0, 100)] public float baseJumpHeight;
-    //[Range(0, 100)] public int baseAttackDamage;
+    [Range(0, 100)] public int baseAttackDamage;
 
     public float healthEffectStrength;  // How much the ammount of health the player has will change the stats
     [Range(0, 300)] public float healthToSpeedIncrease;
 
     public float currentMoveSpeed;
-    [SerializeField] private float currentJumpHeight;
-    //[SerializeField] private int currentAttackDamage;
+    private float currentJumpHeight;
+    public int currentAttackDamage;
 
 
     [HideInInspector] public Vector2 direction, desiredVelocity, velocity;
@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         currentMoveSpeed = (baseMoveSpeed * (healthEffectStrength / healthToSpeedIncrease)) + baseMoveSpeed;
-        //currentAttackDamage = baseAttackDamage + healthEffectStrength;
+        currentAttackDamage = baseAttackDamage + Mathf.RoundToInt(healthEffectStrength);
 
         direction.x = 0;
         if (controlsEnabled)
@@ -68,14 +68,15 @@ public class PlayerMovement : MonoBehaviour
 
         rb.velocity = velocity;
 
-        if (velocity.x < 0)
+        if (velocity.x < 0 && facingRight == true)
         {
             facingRight = false;
-            
+            transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
         }
-        else if (velocity.x > 0)
+        else if (velocity.x > 0 && facingRight == false)
         {
             facingRight = true;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         }
     }
 
