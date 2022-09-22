@@ -51,4 +51,9 @@ public class PlayerHealth : MonoBehaviour
 
         StartCoroutine(StarvationDamage());  // Repeat
     }
+
+    public int GetHealth()
+    {
+        return health;
+    }
 }
