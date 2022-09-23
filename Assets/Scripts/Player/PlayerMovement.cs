@@ -7,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Components")]
     private PlayerHealth playerHealth;
     private Rigidbody rb;
-    private Animator anim;
 
     [Header("Movement")]
     [Range(0, 10)] public float baseMoveSpeed;
@@ -35,7 +34,6 @@ public class PlayerMovement : MonoBehaviour
     {
         playerHealth = GetComponent<PlayerHealth>();
         rb = GetComponent<Rigidbody>();
-        anim = GetComponent<Animator>();
         groundCheck = GetComponent<GroundCheck>();
     }
 
@@ -52,16 +50,10 @@ public class PlayerMovement : MonoBehaviour
 
         desiredVelocity = new Vector2(direction.x, 0f) * Mathf.Max(currentMoveSpeed, 0f);
         if (rb.velocity.x != 0)
-        {
             isMoving = true;
-            anim.SetBool("Moving", true);
-        }
         else
-        {
             isMoving = false;
-            anim.SetBool("Moving", false);
-        }
-        }
+    }
 
 
 
@@ -87,7 +79,6 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         }
     }
-<<<<<<< HEAD
 
 
 
@@ -96,6 +87,4 @@ public class PlayerMovement : MonoBehaviour
     //Coyote Time - https://www.youtube.com/watch?v=RFix_Kg2Di0
     //Vertex Waves - https://www.youtube.com/watch?v=vje0x1BNpp8
 
-=======
->>>>>>> origin/Map-Building
 }
