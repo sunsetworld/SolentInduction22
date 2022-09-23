@@ -6,8 +6,13 @@ TagManager:
   tags:
   - Reset
   - Enemy
+<<<<<<< HEAD
   - Bullet
   - Player Attack
+=======
+  - Player Attack
+  - Enemy Attack
+>>>>>>> origin/Map-Building
   layers:
   - Default
   - TransparentFX
