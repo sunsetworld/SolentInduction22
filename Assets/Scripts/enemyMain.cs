@@ -59,7 +59,7 @@ public class enemyMain : MonoBehaviour
         prevPos = transform.position;
         yield return new WaitForSeconds(0.3f);
         actualPos = transform.position;
-        Debug.Log(Vector3.Distance(player.position, actualPos));
+
         if (Vector3.Distance(prevPos, actualPos) <= 0.8f) 
             anim.SetBool("Moving", false);
         else

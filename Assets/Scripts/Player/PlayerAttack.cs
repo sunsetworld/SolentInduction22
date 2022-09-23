@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     private PlayerMovement playerMovement;
+    private Animator anim;
     public GameObject attackHitbox;
     public float hitboxLength;
     public int damage;
@@ -14,6 +15,7 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -25,10 +27,13 @@ public class PlayerAttack : MonoBehaviour
 
     private IEnumerator Hitbox()
     {
+        //anim.SetTrigger("Attack");
+        anim.Play("Slime - Attack");
+        cooldownComplete = false;
+        yield return new WaitForSeconds(0.1f);
         attackHitbox.SetActive(true);
         yield return new WaitForSeconds(hitboxLength);
         attackHitbox.SetActive(false);
-        cooldownComplete = false;
         StartCoroutine(Cooldown());
     }
 
