@@ -87,11 +87,4 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         }
     }
-
-
-
-
-    //Variable Jump Height - https://www.youtube.com/watch?v=Mo1-sKYbks0
-    //Coyote Time - https://www.youtube.com/watch?v=RFix_Kg2Di0
-    //Vertex Waves - https://www.youtube.com/watch?v=vje0x1BNpp8
 }

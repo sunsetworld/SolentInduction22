@@ -117,7 +117,7 @@ public class PlayerJumping : MonoBehaviour
         if (coyoteCounter > 0 || jumpPhase < maxAirJumps)
         {
             jumpPhase += 1;
-            anim.SetTrigger("Jump");
+            anim.Play("Slime - Jump");
 
             jumpSpeed = Mathf.Sqrt(-2f * Physics2D.gravity.y * jumpHeight);
 
