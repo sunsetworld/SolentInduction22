@@ -11,6 +11,7 @@ public class PlayerJumping : MonoBehaviour
     [Range(0f, 5f)] public float upwardMovementMultiplier = 1.7f;
 
     private Rigidbody rb;
+    private Animator anim;
     private GroundCheck groundCheck;
     private PlayerMovement playerMovement;
     private Vector2 velocity;
@@ -34,6 +35,7 @@ public class PlayerJumping : MonoBehaviour
         groundCheck = GetComponent<GroundCheck>();
         gravity = gameObject.AddComponent<ConstantForce>();
         playerMovement = GetComponent<PlayerMovement>();
+        anim = GetComponent<Animator>();
     }
 
 
@@ -46,9 +48,15 @@ public class PlayerJumping : MonoBehaviour
             rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y * 0.5f, 0);
 
         if (isGrounded)  // Coyote time manager
+        {
             coyoteCounter = coyoteTime;
+            anim.SetBool("Grounded", true);
+        }
         else
+        {
             coyoteCounter -= Time.deltaTime;
+            anim.SetBool("Grounded", false);
+        }
     }
 
 
@@ -109,6 +117,7 @@ public class PlayerJumping : MonoBehaviour
         if (coyoteCounter > 0 || jumpPhase < maxAirJumps)
         {
             jumpPhase += 1;
+            anim.Play("Slime - Jump");
 
             jumpSpeed = Mathf.Sqrt(-2f * Physics2D.gravity.y * jumpHeight);
 

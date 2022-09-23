@@ -23,6 +23,6 @@ public class GameHUD : MonoBehaviour
 
     void UpdateHealth()
     {
-        sliderValue.value = player.GetHealth();
+       // sliderValue.value = player.GetHealth();
     }
 }

@@ -3,15 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-<<<<<<< HEAD
   tags: []
-=======
-  tags:
-  - Reset
-  - Enemy
-  - Bullet
-  - Player Attack
->>>>>>> parent of ba3126b (Changed files.)
   layers:
   - Default
   - TransparentFX
