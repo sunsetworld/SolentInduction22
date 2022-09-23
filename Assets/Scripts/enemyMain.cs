@@ -33,7 +33,7 @@ public class enemyMain : MonoBehaviour
     {
         EnemyNavMeshAgent.SetDestination(player.position);
 
-        if (iFramesRemaining > 0)
+        if (iFramesRemaining > 0 && health > 0)
         {
             iFramesRemaining -= Time.deltaTime;
         }
@@ -42,14 +42,16 @@ public class enemyMain : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        if (iFramesRemaining <= 0 && col.gameObject.CompareTag("Player Attack"))
+        if (iFramesRemaining <= 0 && col.gameObject.CompareTag("Player Attack") && health > 0)
         {
             iFramesRemaining = invincibilityTime;
             health -= playerMovement.currentAttackDamage;
-            anim.SetTrigger("Hurt");
+            anim.Play("Hurt");
             if (health <= 0)
             {
-                Destroy(gameObject);
+                EnemyNavMeshAgent.enabled = false;
+                anim.Play("Wizard - Dead");
+                StartCoroutine(Death());
             }
         }
     }
@@ -75,7 +77,7 @@ public class enemyMain : MonoBehaviour
     private IEnumerator Hitbox()
     {
         cooldownComplete = false;
-        anim.SetTrigger("Attack");
+        anim.Play("Attack");
         yield return new WaitForSeconds(1f);
         attackHitbox.SetActive(true);
         yield return new WaitForSeconds(hitboxLength);
@@ -87,6 +89,16 @@ public class enemyMain : MonoBehaviour
     {
         yield return new WaitForSeconds(attackCooldown);
         attackHitbox.SetActive(false);
-        cooldownComplete = true;
+        if (health > 0)
+            cooldownComplete = true;
+    }
+
+    private IEnumerator Death()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Rigidbody trb = GetComponent<Rigidbody>();
+        trb.useGravity = false;
+        trb.constraints = RigidbodyConstraints.FreezePosition;
+        GetComponent<BoxCollider>().enabled = false;
     }
 }

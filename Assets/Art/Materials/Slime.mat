@@ -108,7 +108,7 @@ Material:
     - _SrcBlend: 1
     - _Surface: 0
     - _Wave_Noise_Scale: 5
-    - _Wave_Size: -0.44444445
+    - _Wave_Size: -0.42222223
     - _Wave_Speed: 2
     - _WorkflowMode: 1
     - _ZWrite: 1
