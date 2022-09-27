@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 public class enemyMain : MonoBehaviour
@@ -31,7 +32,11 @@ public class enemyMain : MonoBehaviour
 
     void Update()
     {
-        EnemyNavMeshAgent.SetDestination(player.position);
+        if (EnemyNavMeshAgent.isActiveAndEnabled == true)
+        {
+            EnemyNavMeshAgent.SetDestination(player.position);
+
+        }
 
         if (iFramesRemaining > 0 && health > 0)
         {
